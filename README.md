@@ -6,10 +6,13 @@ I'm a fan of competitive sports and having a simple-to-use ranking system for ad
 
 ### My general learning goals include:
 * Agile approach
+* Test Driven Development
 
 ### My technical learning goals include:
-* Node
-* Knockout
-* Browserify
+* Server-side - Node, Express
+* Client-side - Knockout, CommonJS, and Browserify
+* Testing - Jasmine
 
-
+### My infrastructure learning goals include:
+* Public hosting - Heroku
+* Continuous integration - Travis
