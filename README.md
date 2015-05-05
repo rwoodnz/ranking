@@ -16,3 +16,9 @@ I'm a fan of competitive sports and having a simple-to-use ranking system for ad
 ### My infrastructure learning goals include:
 * Public hosting - Heroku
 * Continuous integration - Travis
+
+### To Do
+* Set up 
+* Install Jasmine, ensure working in dev environment and on Travis
+* Install Knockout, ensure working 
+* Investigate database options
