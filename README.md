@@ -17,8 +17,13 @@ I'm a fan of competitive sports and having a simple-to-use ranking system for ad
 * Public hosting - Heroku
 * Continuous integration - Travis
 
-### To Do
-* Set up 
+### User stories
+* As a user I can log in. 
+
+### Misc To Do
 * Install Jasmine, ensure working in dev environment and on Travis
 * Install Knockout, ensure working 
 * Investigate database options
+
+### Tidy up
+* Remove the users.js and references in app.js, if not needed
