@@ -16,7 +16,7 @@ module.exports = function(passport){
 	/* GET login page. */
 	router.get('/', function(req, res) {
     	// Display the Login page with any flash message, if any
-		res.render('index', { title: 'Sports Ranking' , message: req.flash('message') });
+		res.render('pages/index', { title: 'Sports Ranking' , message: req.flash('message') });
 	});
 
 	/* Handle Login POST */
@@ -26,9 +26,14 @@ module.exports = function(passport){
 		failureFlash : true  
 	}));
 
+	/* about page */
+	router.get('/about', function(req, res) {
+	    res.render('pages/about');
+	});
+
 	/* GET Registration Page */
 	router.get('/signup', function(req, res){
-		res.render('register',{message: req.flash('message')});
+		res.render('pages/register',{message: req.flash('message')});
 	});
 
 	/* Handle Registration POST */
@@ -40,7 +45,7 @@ module.exports = function(passport){
 
 	/* GET Home Page */
 	router.get('/home', isAuthenticated, function(req, res){
-		res.render('home', { user: req.user });
+		res.render('pages/home', { user: req.user });
 	});
 
 	/* Handle Logout */

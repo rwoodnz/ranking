@@ -18,12 +18,12 @@ I'm a fan of competitive sports and having a simple-to-use ranking system for ad
 * Continuous integration - Travis
 
 ### User stories
-* As a user I can log in. 
+* As a user I can log in - done
 
 ### Misc To Do
-* Install Jasmine, ensure working in dev environment and on Travis
-* Install Knockout, ensure working 
-* Investigate database options
+* Move login/logout to top bar
+* Install Mocha, ensure working in dev environment and on Travis
+* Install Knockout, ensure working
 
 ### Tidy up
-* Remove the users.js and references in app.js, if not needed
+
