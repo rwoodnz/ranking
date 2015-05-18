@@ -11,26 +11,17 @@
 
 <main>
     <div class="jumbotron">
-		<h1 class="text-left login-title"><%= title %></h1>
-		<div class='container'>
-			<div class="row">
-				<div class="col-sm-6 col-md-4 col-md-offset-4">
-					<div class="account-wall">
-						<form class='form-signin', action='/login', method='POST'>
-							<input type='text' name='username' class='form-control' placeholder='Username' required  autofocus />
-							<input type='password' name='password' class='form-control' placeholder='Password' required />
-							<button class='btn btn-lg btn-primary btn-block' type='submit'>Sign in</button>
-							<span class="clearfix"></span>
-                        </form>
-						
-					</div>
-					<a href='/signup' class='text-center new-account'>Create an account</a>
-					<div id="message">
-						<h1 class="text-center error-message"><%= message %></h1>
-                    </div>
-	             </div>
-	        </div>
-		</div>
+<!--         <a href='/signup' class='text-center sign-up'>Sign Up</a>-->
+       
+        <form class='signin', action='/login', method='POST'>
+			<input type='text' id='username' name='username' class='form-control' placeholder='Username' required  autofocus />
+			<input type='password' id='password' name='password' class='password form-control' placeholder='Password' required />
+			<button class='btn btn-lg btn-primary btn-block' type='submit'>Sign in</button>
+        </form>
+        
+        <div id="message">
+    		<h1 class="text-center error-message"><%= message %></h1>
+        </div>
     </div>
 </main>
 
