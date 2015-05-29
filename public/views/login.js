@@ -3,11 +3,38 @@ var login = function(args) {
     //Model
     var loginViewModel = function(username, password) 
     {
-        this.username = ko.observable(username);
-        this.password = ko.observable(password);
-        this.fullName = ko.pureComputed(function() {
-            return this.username();
-        }, this);
+        var vm = this;
+        vm.username = ko.observable();
+        vm.password = ko.observable();
+        vm.loginMessage = ko.observable();
+        vm.showName = ko.observable(false);
+        
+        vm.setLoginMessage = function(message, callback) {
+            vm.loginMessage(message);
+            setTimeout(function() {
+                vm.loginMessage('');
+                callback();
+            }, 2000);
+        }
+        
+        vm.login = function(){
+            $.post( "/login",
+              { username: vm.username(), password: vm.password() }
+            ).done(function( response ) 
+            {
+                vm.setLoginMessage('Login succeeded', function() {
+                    vm.showName(true);
+                });
+                vm.password('');
+            }).fail(function(response) {
+                if(response.status === 401) 
+                {
+                    vm.setLoginMessage('login failed', null);
+                }
+            });
+        }
+        
+        
     };
     
     //Template

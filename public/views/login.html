@@ -1,3 +1,14 @@
-<p>Username: <input data-bind="value: username" /></p>
-<p>Password: <input type='password' data-bind="value: password" /></p>
-<h2>Hello, <span data-bind="text: fullName"> </span>!</h2>
+
+<div class='pull-right login'> 
+	<div>
+		<span data-bind="visible: !showName()" >
+			<input id="username" data-bind="value: username" placeholder="Username" />
+			<input type='password' data-bind="value: password" placeholder="Password" />
+			<button class='btn btn-xs' data-bind="click: login">Login</button>
+		</span>
+		<span data-bind="visible: showName()" >
+			<p data-bind="text: username"></p>
+		</span>
+	</div>
+	<p class="text-warning" data-bind="text: loginMessage"></p>
+</div>	
