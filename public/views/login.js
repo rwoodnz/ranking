@@ -9,12 +9,12 @@ var login = function(args) {
         vm.loginMessage = ko.observable();
         vm.loggedIn = ko.observable(false);
         
-        vm.setLoginMessage = function(message, callback) {
+        vm.setLoginMessage = function(message, timeToShow, callback) {
             vm.loginMessage(message);
             setTimeout(function() {
                 vm.loginMessage('');
-                callback();
-            }, 2000);
+                if(callback != null) callback();
+            }, timeToShow);
         }
         
         vm.login = function() {
@@ -22,14 +22,14 @@ var login = function(args) {
               { username: vm.username(), password: vm.password() }
             ).done(function( response ) 
             {
-                vm.setLoginMessage('Login succeeded', function() {
+                vm.setLoginMessage('Login succeeded', 2000, function() {
                     vm.loggedIn(true);
                 });
                 vm.password('');
             }).fail(function(response) {
                 if(response.status === 401) 
                 {
-                    vm.setLoginMessage('login failed', null);
+                    vm.setLoginMessage('login failed', 4000);
                 }
             });
         }
@@ -45,6 +45,10 @@ var login = function(args) {
         vm.logout = function() {
             vm.loggedIn(false);
             $.get("/logout");
+        }
+
+        vm.register = function() {
+            setupRegistration();
         }
     };
     
