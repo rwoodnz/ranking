@@ -1,13 +1,18 @@
 
 <div class='pull-right login'> 
-	<div>
-		<span data-bind="visible: !showName()" >
-			<input id="username" data-bind="value: username" placeholder="Username" />
-			<input type='password' data-bind="value: password" placeholder="Password" />
+	<div class="loginLine">
+		<span data-bind="visible: !loggedIn()" >
+			<input id="username" 
+					data-bind="value: username" 
+					placeholder="Username" />
+			<input type='password' 
+					data-bind="value: password, event: {keyup: enterForLogin}" 
+					placeholder="Password" />
 			<button class='btn btn-xs' data-bind="click: login">Login</button>
 		</span>
-		<span data-bind="visible: showName()" >
-			<p data-bind="text: username"></p>
+		<span data-bind="visible: loggedIn()" >
+			<span data-bind="text: username"></span>
+			<button class='btn btn-xs' data-bind="click: logout">Logout</button>
 		</span>
 	</div>
 	<p class="text-warning" data-bind="text: loginMessage"></p>

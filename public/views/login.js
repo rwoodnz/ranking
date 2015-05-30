@@ -7,7 +7,7 @@ var login = function(args) {
         vm.username = ko.observable();
         vm.password = ko.observable();
         vm.loginMessage = ko.observable();
-        vm.showName = ko.observable(false);
+        vm.loggedIn = ko.observable(false);
         
         vm.setLoginMessage = function(message, callback) {
             vm.loginMessage(message);
@@ -17,13 +17,13 @@ var login = function(args) {
             }, 2000);
         }
         
-        vm.login = function(){
+        vm.login = function() {
             $.post( "/login",
               { username: vm.username(), password: vm.password() }
             ).done(function( response ) 
             {
                 vm.setLoginMessage('Login succeeded', function() {
-                    vm.showName(true);
+                    vm.loggedIn(true);
                 });
                 vm.password('');
             }).fail(function(response) {
@@ -34,7 +34,18 @@ var login = function(args) {
             });
         }
         
+        vm.enterForLogin = function(data, event){
+            if(event.keyCode == 13) { 
+                vm.login();
+            } else {
+                return true;
+            }
+        }
         
+        vm.logout = function() {
+            vm.loggedIn(false);
+            $.get("/logout");
+        }
     };
     
     //Template
