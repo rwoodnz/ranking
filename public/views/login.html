@@ -4,16 +4,16 @@
 		<span data-bind="visible: !loggedIn()" >
 			<input class="form-entry form-control" 
 					id="username" 
-					data-bind="value: username" 
+					data-bind="textInput: username" 
 					placeholder="Username" 
 					autofocus />
 			<input class="form-entry form-control " 
 					type='password' 
-					data-bind="value: password, event: {keyup: enterForLogin}" 
+					data-bind="textInput: password, event: {keyup: enterForLogin}" 
 					placeholder="Password" />
 			<span class="navbar-right">
 				<button class='btn btn-sm' data-bind="click: login">Login</button>
-				or <button class='btn btn-sm' data-bind="click: register">Register</button>
+				or <button class='btn btn-sm' data-bind="click: setupRegistration">Register</button>
 			</span>
 		</span>
 		<span class="logout" data-bind="visible: loggedIn()" >

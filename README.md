@@ -18,6 +18,3 @@ Having a simple-to-use ranking system for ad-hoc use would be handy.
 * Public hosting - Heroku
 * Continuous integration - Travis
 
-
-
-

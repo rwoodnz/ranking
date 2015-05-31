@@ -4,7 +4,7 @@ body {
 }
 
 a {
-  color: #00B7FF;
+  color: #00BBFF;
 }
 
 .brand {
@@ -14,51 +14,46 @@ a {
     background-repeat: no-repeat;
     width: 200px;
     height: 50px;
-    margin: 15px 0;
-
+    margin: 10px;
 }
 
-.sign-up, .sign-out {
-    float:right; 
-    margin-bottom: 15px; 
+.navbar-toggle {
+    margin: 12px;
 }
 
-.signin {
-    max-width: 330px;
-    padding: 15px;
-    margin: 0 auto;
+.navbar-header {
+    margin: 20px
 }
 
-.signin .form-control{
-    position: relative;
-    font-size: 16px;
-    height: auto;
-    padding: 10px;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-.signin .form-control:focus{
-    z-index: 2;
-}
-.signin input[type="text"]{
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-}
-.signin input[type="password"]{
-    margin-bottom: 8px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-}
-.signin input[type="password"].nomargin{
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+.login {
+    margin:10px;
+    padding: 20px 0;
 }
 
-.login-title {
-    color: #555;
-    font-size: 16px;
-    margin: 15px;
+.loginLine input {
+    margin:0 2px 2px 2px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.loginLine button {
+    margin:2px 0 0 4px;
+}
+
+.logout button {
+    margin:0;
+}
+
+.form-entry {
+    width: 200px;
+}
+
+.top-margin-10 {
+    margin-top: 10px;
+}
+
+.left-margin-10 {
+    margin-left: 10px;
 }
 
 h1.error-message{
