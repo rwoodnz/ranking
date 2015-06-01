@@ -21,5 +21,8 @@
 			<button class='btn btn-sm' data-bind="click: logout">Logout</button>
 		</span>
 	</div>
+	<div class="loginLine form-inline" data-bind="visible: registrationVisible()">
+		<button class='btn btn-sm' data-bind="click: cancelRegistration()">Cancel registration</button>
+	</div>
 	<p class="text-warning left-margin-10 top-margin-10" data-bind="text: loginMessage"></p>
 </div>	

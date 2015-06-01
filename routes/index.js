@@ -21,24 +21,24 @@ module.exports = function(passport){
 	/* Handle Login POST */
 	router.post('/login', passport.authenticate('login', {
 		successRedirect: '/home',
-		failureRedirect: '/loginfail',
+		failureRedirect: '/authenticationfail',
 		failureFlash : true  
 	}));
 
-//	/* GET Registration Page */
+//	/* GET Registration Page */ probably not needed
 //	router.get('/signup', function(req, res){
 //		res.render('pages/register',{message: req.flash('message')});
 //	});
 //
-//	/* Handle Registration POST */
-//	router.post('/signup', passport.authenticate('signup', {
-//		successRedirect: '/home',
-//		failureRedirect: '/signup',
-//		failureFlash : true  
-//	}));
-//
-	/* Handle failed login */
-	router.get('/loginfail', function(req, res){
+	/* Handle Registration POST */
+	router.post('/register', passport.authenticate('signup', {
+		successRedirect: '/home',
+		failureRedirect: '/authenticationfail',
+		failureFlash : true  
+	}));
+
+	/* Handle failed authentication */
+	router.get('/authenticationfail', function(req, res){
 		res.sendStatus(401);
 	})
 
