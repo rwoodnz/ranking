@@ -52,6 +52,8 @@ var loginViewModel = function()
     
     vm.logout = function() {
         vm.loggedIn(false);
+        vm.username("");
+        vm.password("");
         $.get("/logout");
     }
 

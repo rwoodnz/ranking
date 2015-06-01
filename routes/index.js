@@ -25,11 +25,6 @@ module.exports = function(passport){
 		failureFlash : true  
 	}));
 
-//	/* GET Registration Page */ probably not needed
-//	router.get('/signup', function(req, res){
-//		res.render('pages/register',{message: req.flash('message')});
-//	});
-//
 	/* Handle Registration POST */
 	router.post('/register', passport.authenticate('signup', {
 		successRedirect: '/home',
