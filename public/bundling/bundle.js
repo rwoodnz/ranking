@@ -27,7 +27,9 @@ build({
 var build = function(args) {
     
     if(args.viewModel == null) {
-        $(args.attachTo).html(args.template)
+        //ko.components.register caused problems when no viewModel so load directly
+        $(args.attachTo).html(args.template);
+        
     } else {
         var viewModel = args.viewModel; //ko.components.register requires a var for the viewModel
         
@@ -52,17 +54,6 @@ var loginViewModel = function()
     vm.password = ko.observable();
     vm.loginMessage = ko.observable();
     vm.loggedIn = ko.observable(false);
-    vm.registrationVisible = ko.observable(false);
-        
-    vm.setupRegistration = function() {
-        registrationVisible(true)
-        $('.collapse').collapse('hide')
-    }
-    
-    vm.cancelRegistration = function() {
-        registrationVisible(false);
-        $('.collapse').collapse('show')
-    }
     
     vm.setLoginMessage = function(message, timeToShow, callback) {
         vm.loginMessage(message);
@@ -118,6 +109,17 @@ var registerViewModel = function()
     vm.firstName = ko.observable();
     vm.lastName = ko.observable();
     vm.registrationMessage = ko.observable();
+    vm.registrationVisible = ko.observable(false);
+        
+    vm.setupRegistration = function() {
+        registrationVisible(true)
+        $('.collapse').collapse('hide')
+    }
+    
+    vm.cancelRegistration = function() {
+        registrationVisible(false);
+        $('.collapse').collapse('show')
+    } 
            
     vm.setRegistrationMessage = function(message, timeToShow, callback) {
         vm.registrationMessage(message);

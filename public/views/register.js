@@ -8,6 +8,17 @@ var registerViewModel = function()
     vm.firstName = ko.observable();
     vm.lastName = ko.observable();
     vm.registrationMessage = ko.observable();
+    vm.registrationVisible = ko.observable(false);
+        
+    vm.setupRegistration = function() {
+        registrationVisible(true)
+        $('.collapse').collapse('hide')
+    }
+    
+    vm.cancelRegistration = function() {
+        registrationVisible(false);
+        $('.collapse').collapse('show')
+    } 
            
     vm.setRegistrationMessage = function(message, timeToShow, callback) {
         vm.registrationMessage(message);

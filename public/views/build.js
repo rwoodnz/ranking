@@ -1,7 +1,9 @@
 var build = function(args) {
     
     if(args.viewModel == null) {
-        $(args.attachTo).html(args.template)
+        //ko.components.register caused problems when no viewModel so load directly
+        $(args.attachTo).html(args.template);
+        
     } else {
         var viewModel = args.viewModel; //ko.components.register requires a var for the viewModel
         

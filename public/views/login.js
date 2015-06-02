@@ -5,17 +5,6 @@ var loginViewModel = function()
     vm.password = ko.observable();
     vm.loginMessage = ko.observable();
     vm.loggedIn = ko.observable(false);
-    vm.registrationVisible = ko.observable(false);
-        
-    vm.setupRegistration = function() {
-        registrationVisible(true)
-        $('.collapse').collapse('hide')
-    }
-    
-    vm.cancelRegistration = function() {
-        registrationVisible(false);
-        $('.collapse').collapse('show')
-    }
     
     vm.setLoginMessage = function(message, timeToShow, callback) {
         vm.loginMessage(message);
