@@ -5,7 +5,7 @@ var build = require("./build.js")
 build({
 	attachTo:'body', 
 	viewModel:null, 
-	template: "<div id=\"main\">\n\t <navbar>\n\t </navbar>\n\t <register>\n\t </register>\n</div>\n"
+	template: "<div id=\"main\">\n\t <navbar>\n\t </navbar>\n\t <register>\n\t </register>\n\t <user>\n\t </user>\n</div>\n"
 	})
 build({
 	attachTo:'navbar', 
@@ -15,15 +15,22 @@ build({
 build({
 	attachTo:'login', 
 	viewModel:require("./login.js"),  
-	template: "\n<div class='pull-right login'> \n\t<div class=\"loginLine form-inline\" data-bind=\"visible: !registrationVisible()\">\n\t\t<span data-bind=\"visible: !loggedIn()\" >\n\t\t\t<input class=\"form-entry form-control\" \n\t\t\t\t\tid=\"username\" \n\t\t\t\t\tdata-bind=\"textInput: username\" \n\t\t\t\t\tplaceholder=\"Username\" \n\t\t\t\t\tautofocus />\n\t\t\t<input class=\"form-entry form-control \" \n\t\t\t\t\ttype='password' \n\t\t\t\t\tdata-bind=\"textInput: password, event: {keyup: enterForLogin}\" \n\t\t\t\t\tplaceholder=\"Password\" />\n\t\t\t<span class=\"navbar-right\">\n\t\t\t\t<button class='btn btn-sm' data-bind=\"click: login\">Login</button>\n\t\t\t\tor <button class='btn btn-sm' data-bind=\"click: setupRegistration\">Register</button>\n\t\t\t</span>\n\t\t</span>\n\t\t<span class=\"logout\" data-bind=\"visible: loggedIn()\" >\n\t\t\t<span class=\"form-control\" data-bind=\"text: username\"></span>\n\t\t\t<button class='btn btn-sm' data-bind=\"click: logout\">Logout</button>\n\t\t</span>\n\t</div>\n\t<div class=\"loginLine form-inline\" data-bind=\"visible: registrationVisible()\">\n\t\t<button class='btn btn-sm' data-bind=\"click: cancelRegistration()\">Cancel registration</button>\n\t</div>\n\t<div class=\"text-warning left-margin-10 top-margin-10\" data-bind=\"text: loginMessage\"></div>\n</div>\t\n"
+	template: "\n<div class='pull-right login'> \n\t<div class=\"loginLine form-inline\" data-bind=\"visible: !registrationVisible()\">\n\t\t<span data-bind=\"visible: !loggedIn()\" >\n\t\t\t<input class=\"form-entry form-control\" \n\t\t\t\t\tid=\"username\" \n\t\t\t\t\tdata-bind=\"textInput: username\" \n\t\t\t\t\tplaceholder=\"Username\" \n\t\t\t\t\tautofocus />\n\t\t\t<input class=\"form-entry form-control \" \n\t\t\t\t\ttype='password' \n\t\t\t\t\tdata-bind=\"textInput: password, event: {keyup: enterForLogin}\" \n\t\t\t\t\tplaceholder=\"Password\" />\n\t\t\t<span class=\"navbar-right\">\n\t\t\t\t<button class='btn btn-sm' data-bind=\"click: login\">Login</button>\n\t\t\t\tor <button class='btn btn-sm' data-bind=\"click: setupRegistration\">Register</button>\n\t\t\t</span>\n\t\t</span>\n\t\t<span class=\"logout\" data-bind=\"visible: loggedIn()\" >\n\t\t\t<span class=\"form-control\" data-bind=\"text: username, click: openUser\"></span>\n\t\t\t<button class='btn btn-sm' data-bind=\"click: logout\">Logout</button>\n\t\t</span>\n\t</div>\n\t<div class=\"loginLine form-inline\" data-bind=\"visible: registrationVisible()\">\n\t\t<button class='btn btn-sm' data-bind=\"click: cancelRegistration\">Cancel registration</button>\n\t</div>\n\t<div class=\"text-warning left-margin-10 top-margin-10\" data-bind=\"text: loginMessage\"></div>\n</div>\t\n"
 	})
 build({
 	attachTo:'register', 
 	viewModel:require("./register.js"),  
 	template: "<div class=\"jumbotron\" data-bind=\"visible: registrationVisible()\">\n\t<div>\n\t\t<div class=\"form-group\">\n\t\t\t<label for=\"username\">Username</label>\n\t\t\t<input type='text' class=\"form-entry form-control\" id=\"username\" data-bind='value: registrationUsername' placeholder='Username' />\n\t\t</div>\n\t\t<div class=\"form-group\">\n\t\t\t<label for=\"password\">Password</label>\n\t\t\t<input type='password' class=\"form-entry form-control\" id=\"password\" data-bind='value: registrationPassword' placeholder='Password'/>\n\t\t</div>\n\t\t<div class=\"form-group\">\n\t\t\t<label for=\"firstname\">First name</label>\n\t\t\t<input type='text' class=\"form-entry form-control\" id=\"firstname\" data-bind='value: firstName' placeholder='First Name'/>\n\t\t</div>\n\t\t<div class=\"form-group\">\n\t\t\t<label for=\"lastname\">Last name</label>\n\t\t\t<input type='text' class=\"form-entry form-control\" id=\"lastname\" data-bind='value: lastName' placeholder='Last Name'/>\n\t\t</div>\n\t\t<div class=\"form-group\">\n\t\t\t<label for=\"email\">Email address</label>\n\t\t\t<input type='email' class=\"form-entry form-control\" id=\"email\" data-bind='value: email' placeholder='Email'/>\n\t\t</div>\n\t\t<div class=\"form-group\">\n\t\t\t<button class='btn btn-sm' data-bind=\"click: save\">Save</button>\n\t\t</div>\n\t\t<div class=\"text-warning left-margin-10 top-margin-10\" data-bind=\"text: registrationMessage\"></div>\n\t</div>\n</div>"
 	})
+build({
+	attachTo:'user', 
+	viewModel:require("./user.js"),  
+	template: "<div class=\"jumbotron\" data-bind=\"visible: userVisible()\">\n\t<div>\n\t\t<div class=\"form-group\">\n\t\t\t<label for=\"username\">Username</label>\n\t\t\t<input type='text' class=\"form-entry form-control\" id=\"username\" data-bind='value: userUsername' placeholder='Username' />\n\t\t</div>\n\t\t<div class=\"form-group\">\n\t\t\t<label for=\"password\">Password</label>\n\t\t\t<input type='password' class=\"form-entry form-control\" id=\"password\" data-bind='value: userPassword' placeholder='Password'/>\n\t\t</div>\n\t\t<div class=\"form-group\">\n\t\t\t<label for=\"firstname\">First name</label>\n\t\t\t<input type='text' class=\"form-entry form-control\" id=\"firstname\" data-bind='value: userFirstName' placeholder='First Name'/>\n\t\t</div>\n\t\t<div class=\"form-group\">\n\t\t\t<label for=\"lastname\">Last name</label>\n\t\t\t<input type='text' class=\"form-entry form-control\" id=\"lastname\" data-bind='value: userLastName' placeholder='Last Name'/>\n\t\t</div>\n\t\t<div class=\"form-group\">\n\t\t\t<label for=\"email\">Email address</label>\n\t\t\t<input type='email' class=\"form-entry form-control\" id=\"email\" data-bind='value: userEmail' placeholder='Email'/>\n\t\t</div>\n\t\t<div class=\"form-group\">\n\t\t\t<button class='btn btn-sm' data-bind=\"click: addUser\">Save</button>\n\t\t</div>\n\t\t<div class=\"text-warning left-margin-10 top-margin-10\" data-bind=\"text: userMessage\"></div>\n\t</div>\n</div>"
+	})
+	
+	
 
-},{"./build.js":2,"./login.js":3,"./register.js":4}],2:[function(require,module,exports){
+},{"./build.js":2,"./login.js":3,"./register.js":4,"./user.js":5}],2:[function(require,module,exports){
 var build = function(args) {
     
     if(args.viewModel == null) {
@@ -102,7 +109,6 @@ module.exports = loginViewModel;
 var registerViewModel = function() 
 {
     var vm = this;
-    // getting interference with login component
     vm.registrationUsername = ko.observable(); 
     vm.registrationPassword = ko.observable();
     vm.email = ko.observable();
@@ -157,5 +163,95 @@ var registerViewModel = function()
 }
 
 module.exports = registerViewModel;
+
+},{}],5:[function(require,module,exports){
+var userViewModel = function() 
+{
+    var vm = this;
+    vm.userUsername = ko.observable(); 
+    vm.userPassword = ko.observable();
+    vm.userEmail = ko.observable();
+    vm.userFirstName = ko.observable();
+    vm.userLastName = ko.observable();
+    vm.userMessage = ko.observable();
+    vm.userVisible = ko.observable(false);
+        
+    vm.openUser = function() {
+        userVisible(true)
+        $('.collapse').collapse('hide')
+    }
+    
+    vm.closeUser = function() {
+        vm.userVisible(false);
+        $('.collapse').collapse('show')
+    } 
+           
+    vm.setSetuserMessage = function(message, timeToShow, callback) {
+        vm.userMessage(message);
+        setTimeout(function() {
+            vm.userMessage('');
+            if(callback != null) callback();
+        }, timeToShow);
+    }
+    
+    // eventually implement to replace registration viewmodel and template
+    vm.addUser = function() {
+        $.post( "/register",
+          { username: vm.userUsername(), 
+            password: vm.userPassword(),
+            email: vm.userEmail(),
+            firstname: vm.userFirstName(),
+            lastName: vm.userLastName()
+          }
+        ).done(function( response ) 
+        {
+            vm.setRegistrationMessage('Registration successful', 2000, function() {
+                loggedIn(true);
+                vm.userPassword('');
+                username(vm.userUsername())
+                vm.closeUser();
+            });
+
+        }).fail(function(response) {
+            if(response.status === 401) 
+            {
+                vm.setuserMessage('Registration failed', 4000);
+            }
+        });
+    }
+    
+    // implement for loading a user to edit
+    vm.editUser = function() {
+        //$.get("/getuser")
+        //load results into view model
+    }
+    
+    //Implement for saving an edited a user
+     vm.saveUser = function() {
+        $.post( "/saveuser",
+          { username: vm.userUsername(), 
+            password: vm.userPassword(),
+            email: vm.userEmail(),
+            firstname: vm.userFirstName(),
+            lastName: vm.userLastName()
+          }
+        ).done(function( response ) 
+        {
+            vm.setuserMessage('user saved', 2000, function() {
+                vm.userPassword('');
+                closeUser();
+            });
+
+        }).fail(function(response) {
+            if(response.status === 401) 
+            {
+                vm.setuserMessage('user save failed', 4000);
+            }
+        });
+    }
+    
+}
+
+module.exports = userViewModel;
 
 },{}]},{},[1]);

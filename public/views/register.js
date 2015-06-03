@@ -1,7 +1,6 @@
 var registerViewModel = function() 
 {
     var vm = this;
-    // getting interference with login component
     vm.registrationUsername = ko.observable(); 
     vm.registrationPassword = ko.observable();
     vm.email = ko.observable();

@@ -1,0 +1,28 @@
+<div class="jumbotron" data-bind="visible: userVisible()">
+	<div>
+		<div class="form-group">
+			<label for="username">Username</label>
+			<input type='text' class="form-entry form-control" id="username" data-bind='value: userUsername' placeholder='Username' />
+		</div>
+		<div class="form-group">
+			<label for="password">Password</label>
+			<input type='password' class="form-entry form-control" id="password" data-bind='value: userPassword' placeholder='Password'/>
+		</div>
+		<div class="form-group">
+			<label for="firstname">First name</label>
+			<input type='text' class="form-entry form-control" id="firstname" data-bind='value: userFirstName' placeholder='First Name'/>
+		</div>
+		<div class="form-group">
+			<label for="lastname">Last name</label>
+			<input type='text' class="form-entry form-control" id="lastname" data-bind='value: userLastName' placeholder='Last Name'/>
+		</div>
+		<div class="form-group">
+			<label for="email">Email address</label>
+			<input type='email' class="form-entry form-control" id="email" data-bind='value: userEmail' placeholder='Email'/>
+		</div>
+		<div class="form-group">
+			<button class='btn btn-sm' data-bind="click: addUser">Save</button>
+		</div>
+		<div class="text-warning left-margin-10 top-margin-10" data-bind="text: userMessage"></div>
+	</div>
+</div>

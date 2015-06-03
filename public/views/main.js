@@ -21,3 +21,10 @@ build({
 	viewModel:require("./register.js"),  
 	template: fs.readFileSync(__dirname + '/register.html', 'utf8')
 	})
+build({
+	attachTo:'user', 
+	viewModel:require("./user.js"),  
+	template: fs.readFileSync(__dirname + '/user.html', 'utf8')
+	})
+	
+	
