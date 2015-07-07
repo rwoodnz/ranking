@@ -21,15 +21,13 @@ module.exports = function(passport){
 	/* Handle Login POST */
 	router.post('/login', passport.authenticate('login', {
 		successRedirect: '/home',
-		failureRedirect: '/authenticationfail',
-		failureFlash : true  
+		failureRedirect: '/authenticationfail'
 	}));
 
 	/* Handle Registration POST */
 	router.post('/register', passport.authenticate('signup', {
 		successRedirect: '/home',
-		failureRedirect: '/authenticationfail',
-		failureFlash : true  
+		failureRedirect: '/authenticationfail'
 	}));
 
 	/* Handle failed authentication */

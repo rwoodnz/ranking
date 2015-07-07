@@ -18,3 +18,6 @@ Having a simple-to-use ranking system for ad-hoc use would be handy.
 * Public hosting - Heroku
 * Continuous integration - Travis
 
+### Terminal commands in use in development:
+watchify public/views/main.js -t reactify -o public/bundling/bundle.js
+npm run develop

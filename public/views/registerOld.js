@@ -8,16 +8,11 @@ var registerViewModel = function()
     vm.lastName = ko.observable();
     vm.registrationMessage = ko.observable();
     vm.registrationVisible = ko.observable(false);
-        
-    vm.setupRegistration = function() {
-        registrationVisible(true)
-        $('.collapse').collapse('hide')
-    }
-    
-    vm.cancelRegistration = function() {
-        registrationVisible(false);
-        $('.collapse').collapse('show')
-    } 
+   
+   // if passed a login view model then subscribe to registerSelected     
+    registerSelected.subscribe(function(value) {
+        $('.collapse').collapse(value ? 'hide': 'show')
+    })
            
     vm.setRegistrationMessage = function(message, timeToShow, callback) {
         vm.registrationMessage(message);

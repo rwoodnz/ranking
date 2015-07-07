@@ -9,17 +9,19 @@ var userViewModel = function()
     vm.userMessage = ko.observable();
     vm.userVisible = ko.observable(false);
         
+    userVisible.subscribe(function(value) {
+        $('.collapse').collapse(value ? 'hide': 'show')
+    })    
+    
     vm.openUser = function() {
         userVisible(true)
-        $('.collapse').collapse('hide')
     }
     
     vm.closeUser = function() {
         vm.userVisible(false);
-        $('.collapse').collapse('show')
     } 
            
-    vm.setSetuserMessage = function(message, timeToShow, callback) {
+    vm.setUserMessage = function(message, timeToShow, callback) {
         vm.userMessage(message);
         setTimeout(function() {
             vm.userMessage('');
@@ -48,7 +50,7 @@ var userViewModel = function()
         }).fail(function(response) {
             if(response.status === 401) 
             {
-                vm.setuserMessage('Registration failed', 4000);
+                vm.setUserMessage('Registration failed', 4000);
             }
         });
     }
@@ -78,7 +80,7 @@ var userViewModel = function()
         }).fail(function(response) {
             if(response.status === 401) 
             {
-                vm.setuserMessage('user save failed', 4000);
+                vm.setUserMessage('user save failed', 4000);
             }
         });
     }

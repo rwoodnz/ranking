@@ -1,51 +1,59 @@
-var loginViewModel = function() 
-{
-    var vm = this;
-    vm.username = ko.observable();
-    vm.password = ko.observable();
-    vm.loginMessage = ko.observable();
-    vm.loggedIn = ko.observable(false);
-    
-    vm.setLoginMessage = function(message, timeToShow, callback) {
-        vm.loginMessage(message);
-        setTimeout(function() {
-            vm.loginMessage('');
-            if(callback != null) callback();
-        }, timeToShow);
-    }
-    
-    vm.login = function() {
-        $.post( "/login",
-          { username: vm.username(), password: vm.password() }
+var React = require('react')
+
+var Login = React.createClass({
+
+	handleSubmit: function(e) {
+	    e.preventDefault();
+	    var username = React.findDOMNode(this.refs.username).value.trim();
+	    var password = React.findDOMNode(this.refs.password).value.trim();
+	    if (!username || !password) {
+			this.props.showMessage('Oops! Enter both username and password', 2000);
+	      	return;
+	    }
+	    this.loginToServer(username, password, this.props.showMessage, this.props.setUserName)
+	    React.findDOMNode(this.refs.username).value = '';
+	    React.findDOMNode(this.refs.password).value = '';
+	    return;
+	},
+	
+	loginToServer: function(username, password, showMessage, setUserName) {
+		var that = this;
+		$.post( "/login",
+          { username: username, password: password }
         ).done(function( response ) 
         {
-            vm.setLoginMessage('Login succeeded', 2000, function() {
-                vm.loggedIn(true);
-            });
-            vm.password('');
+			setUserName(username);
+			showMessage('Login succeeded', 2000)
         }).fail(function(response) {
             if(response.status === 401) 
             {
-                vm.setLoginMessage('login failed', 4000);
+                showMessage('Login failed', 4000);
             }
         });
-    }
-    
-    vm.enterForLogin = function(data, event){
-        if(event.keyCode == 13) { 
-            vm.login();
-        } else {
-            return true;
-        }
-    }
-    
-    vm.logout = function() {
-        vm.loggedIn(false);
-        vm.username("");
-        vm.password("");
-        $.get("/logout");
-    }
+	},
 
-};
+	render: function () {
+		
+		return (
+			<span>
+			    <form className="loginForm" onSubmit={this.handleSubmit}>
+					<input className="form-entry form-control" 
+							ref="username"
+							placeholder="Username" 
+							autofocus />
+					<input className="form-entry form-control" 
+							ref="password"
+							type='password' 
+							placeholder="Password" />
+					<span className="navbar-right">
+					<button type='submit' className='btn btn-sm'>Login</button>
+					{'\u00A0'}or 
+					<button type='button' className='btn btn-sm' onClick={this.props.openProfile}>Register</button>
+					</span>
+				</form>
+			</span>
+		)
+	}
+});
 
-module.exports = loginViewModel;
+module.exports = Login;
