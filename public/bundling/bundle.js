@@ -19781,6 +19781,7 @@ module.exports = Login;
 var React = require('react')
 
 var Logout = React.createClass({displayName: "Logout",
+	
 	handleLogout: function () {
 		this.props.clearUserName();
 		this.props.showMessage('Logged out', 4000)
@@ -19790,7 +19791,7 @@ var Logout = React.createClass({displayName: "Logout",
 	render: function () {
 		return (
 			React.createElement("span", {className: "logout"}, 
-				React.createElement("span", {className: "form-control"}, 
+				React.createElement("span", {className: "form-control", onClick: this.props.editProfile}, 
 					this.props.user
 				), 
 				React.createElement("button", {onClick: this.handleLogout, className: "btn btn-sm"}, "Logout")
@@ -19885,7 +19886,7 @@ module.exports = NavBar;
 },{"./login.js":156,"./logout.js":157,"react":155}],159:[function(require,module,exports){
 var React = require('react')
 var NavBar = require('./navbar.js')
-var Profile = require('./profile.js')
+var Register = require('./register.js')
 
 var PageContainer = React.createClass({displayName: "PageContainer",
   	getInitialState: function() {
@@ -19908,10 +19909,18 @@ var PageContainer = React.createClass({displayName: "PageContainer",
       this.setState({registrationOpen: false})
     },
 	
+    showMessage: function (message, timeToShow) {
+        var that = this;
+        that.setState({message: message});
+        setTimeout(function() {
+            that.setState({message: ""});
+        }, 4000);
+    },
+  
   	render: function () {
     		return (
             React.createElement("span", null, 
-          			React.createElement(NavBar, {
+          		React.createElement(NavBar, {
                     user: this.state.user, 
                     setUserName: this.setUserName, 
                     clearUserName: this.clearUserName, 
@@ -19921,12 +19930,17 @@ var PageContainer = React.createClass({displayName: "PageContainer",
                 ), 
                 this.state.registrationOpen
                 ?
-                    React.createElement(Profile, {
-                        user: null}
+                    React.createElement(Register, {
+                        user: null, 
+                        showMessage: this.showMessage, 
+                        closeProfile: this.closeProfile}
                     )        
                 : 
-                  ''
+                   '', 
                 
+                React.createElement("div", {className: "text-warning left-margin-10 top-margin-10"}, 
+      					  	this.state.message
+      					)
             )
     		)
   	}
@@ -19934,50 +19948,73 @@ var PageContainer = React.createClass({displayName: "PageContainer",
 
 module.exports = PageContainer;
 
-},{"./navbar.js":158,"./profile.js":160,"react":155}],160:[function(require,module,exports){
+},{"./navbar.js":158,"./register.js":160,"react":155}],160:[function(require,module,exports){
 var React = require('react')
 
-var Profile = React.createClass({displayName: "Profile",
-	handlesubmit: function(e) {
-		e.preventDefault();
-		return
+var Register = React.createClass({displayName: "Register",
+	
+	handleSubmit: function(e) {
+		e.preventDefault()
+		var postData = {
+			username: React.findDOMNode(this.refs.username).value.trim(),
+	    	password: React.findDOMNode(this.refs.password).value.trim(),
+			firstname: React.findDOMNode(this.refs.firstname).value.trim(),
+	    	lastname: React.findDOMNode(this.refs.lastname).value.trim(),
+			email: React.findDOMNode(this.refs.email).value.trim()
+		}
+		this.postToServer(postData, this.props.showMessage)
 	},
 
+	postToServer: function(postData, showMessage) {
+		var that = this;
+		$.post( "/register", postData)
+		.done(function(response) 
+        {
+			showMessage('Registration succeeded', 2000)
+			that.props.closeProfile();
+        })
+		.fail(function(response) {
+            if(response.status === 401) 
+            {
+                showMessage('Registration failed', 4000);
+            }
+        });
+	},
+	
 	render: function () {
 		return (
 			React.createElement("div", {className: "jumbotron"}, 
 				React.createElement("form", {onSubmit: this.handleSubmit}, 
 					React.createElement("div", {className: "form-group"}, 
 						React.createElement("label", {htmlFor: "username"}, "Username"), 
-						React.createElement("input", {type: "text", className: "form-entry form-control", ref: "username", placeholder: "Username", autofocus: true})
+						React.createElement("input", {type: "text", className: "form-entry form-control", ref: "username", placeholder: "Username (required)", required: true, autofocus: true})
 					), 
 					React.createElement("div", {className: "form-group"}, 
 						React.createElement("label", {htmlFor: "password"}, "Password"), 
-						React.createElement("input", {type: "password", className: "form-entry form-control", ref: "password", placeholder: "Password"})
+						React.createElement("input", {type: "password", className: "form-entry form-control", ref: "password", placeholder: "Password (required)", required: true})
 					), 
 					React.createElement("div", {className: "form-group"}, 
 						React.createElement("label", {htmlFor: "firstname"}, "First name"), 
-						React.createElement("input", {type: "text", className: "form-entry form-control", ref: "firstname", placeholder: "First Name"})
+						React.createElement("input", {type: "text", className: "form-entry form-control", ref: "firstname", placeholder: "First Name (required)", required: true})
 					), 
 					React.createElement("div", {className: "form-group"}, 
 						React.createElement("label", {htmlFor: "lastname"}, "Last name"), 
-						React.createElement("input", {type: "text", className: "form-entry form-control", ref: "lastname", placeholder: "Last Name"})
+						React.createElement("input", {type: "text", className: "form-entry form-control", ref: "lastname", placeholder: "Last Name (required)", required: true})
 					), 
 					React.createElement("div", {className: "form-group"}, 
 						React.createElement("label", {htmlFor: "email"}, "Email address"), 
-						React.createElement("input", {type: "email", className: "form-entry form-control", ref: "email", placeholder: "Email"})
+						React.createElement("input", {type: "email", className: "form-entry form-control", ref: "email", placeholder: "Email (required)", required: true})
 					), 
 					React.createElement("div", {className: "form-group"}, 
 						React.createElement("button", {type: "submit", className: "btn btn-sm"}, "Save")
-					), 
-					React.createElement("div", {className: "text-warning left-margin-10 top-margin-10"})
+					)
 				)
 			)
 		)
 	}
 });
 
-module.exports = Profile;
+module.exports = Register;
 
 },{"react":155}],161:[function(require,module,exports){
 // shim for using process in browser

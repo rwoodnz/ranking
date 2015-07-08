@@ -1,6 +1,6 @@
 var React = require('react')
 var NavBar = require('./navbar.js')
-var Profile = require('./profile.js')
+var Register = require('./register.js')
 
 var PageContainer = React.createClass({
   	getInitialState: function() {
@@ -23,10 +23,18 @@ var PageContainer = React.createClass({
       this.setState({registrationOpen: false})
     },
 	
+    showMessage: function (message, timeToShow) {
+        var that = this;
+        that.setState({message: message});
+        setTimeout(function() {
+            that.setState({message: ""});
+        }, 4000);
+    },
+  
   	render: function () {
     		return (
             <span>
-          			<NavBar 
+          		<NavBar 
                     user={this.state.user}
                     setUserName={this.setUserName}
                     clearUserName={this.clearUserName}
@@ -36,12 +44,17 @@ var PageContainer = React.createClass({
                 />
                 {this.state.registrationOpen
                 ?
-                    <Profile 
+                    <Register 
                         user={null}
+                        showMessage={this.showMessage}
+                        closeProfile={this.closeProfile}
                     />        
                 : 
-                  ''   
+                   ''
                 }
+                <div className="text-warning left-margin-10 top-margin-10" >
+      					  	{this.state.message}
+      					</div>   
             </span>
     		)
   	}
